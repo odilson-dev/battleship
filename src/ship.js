@@ -1,11 +1,11 @@
-class Ship {
-  constructor(length, numberOfHits, isSunk) {
+export default class Ship {
+  constructor(length) {
     this.length = length;
-    this.numberOfHits = numberOfHits;
+    this.numberOfHits = 0;
   }
 
   hits() {
-    this.numberOfHits++;
+    return this.numberOfHits++;
   }
 
   isSunk() {

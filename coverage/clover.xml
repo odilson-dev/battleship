@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1711652306755" clover="3.2.0">
+  <project timestamp="1711652306755" name="All files">
+    <metrics statements="6" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="3" elements="12" coveredelements="8" complexity="0" loc="6" ncloc="6" packages="1" files="2" classes="2"/>
+    <file name="ship.js" path="/home/vboxuser/repos/battleship/src/ship.js">
+      <metrics statements="4" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="2"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="8" count="3" type="stmt"/>
+      <line num="12" count="0" type="cond" truecount="0" falsecount="2"/>
+    </file>
+    <file name="sum.js" path="/home/vboxuser/repos/battleship/src/sum.js">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="4" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
