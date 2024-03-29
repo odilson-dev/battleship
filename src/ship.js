@@ -1,10 +1,11 @@
 export default class Ship {
-  constructor(length) {
+  constructor(length = 1) {
     this.length = length;
     this.numberOfHits = 0;
   }
 
-  hit() {
+  hit(enemy) {
+    enemy.length--;
     return this.numberOfHits++;
   }
 

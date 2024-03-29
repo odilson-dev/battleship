@@ -1,9 +1,11 @@
+import { shuffle } from "lodash";
 import Ship from "../src/ship";
 
 describe("Test whether number of Hits increase correctly after each hits", () => {
   const myShip = new Ship();
+  const yourShip = new Ship();
   beforeEach(() => {
-    myShip.hit();
+    myShip.hit(yourShip);
   });
 
   it("returns 1", () => {
@@ -28,10 +30,10 @@ describe("Test the isSunk method", () => {
   });
 
   it("Should return false", () => {
-    expect(myShip.isSunk()).toBe(false);
+    expect(yourShip.isSunk()).toBe(false);
   });
 
   it("Should return true, because the length of yourShip is 0, therefore it sinks", () => {
-    expect(myShip.isSunk()).toBe(true);
+    expect(yourShip.isSunk()).toBe(true);
   });
 });
