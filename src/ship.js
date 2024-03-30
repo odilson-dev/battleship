@@ -5,6 +5,7 @@ export default class Ship {
     this.length = length;
     this.numberOfHits = 0;
   }
+
   //Create and returns the coordinates of the ship on the gameBoard
   getCoordinates() {
     let coordinate = [];
