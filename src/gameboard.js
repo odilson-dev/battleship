@@ -1,6 +1,6 @@
 export default class GameBoard {
   constructor() {
-    this.data = Array.from({ length: 10 }, () => Array(10));
+    this.grid = Array.from({ length: size }, () => Array(size).fill(null));
   }
   placeShip() {
     const shipPositions = [];
@@ -28,5 +28,18 @@ export default class GameBoard {
     });
 
     this.ships.push({ ship, shipPositions });
+  }
+  receiveAttack(x, y) {
+    if (x < 0 || x >= this.size || y < 0 || y >= this.size) {
+      throw new Error("Attack out of bounds.");
+    }
+
+    const target = this.grid[y][x];
+    if (target === null) {
+      console.log("Miss!");
+    } else {
+      target.hit();
+      console.log(`Hit on ${target.name}!`);
+    }
   }
 }

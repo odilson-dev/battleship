@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711687269790" clover="3.2.0">
-  <project timestamp="1711687269791" name="All files">
-    <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="0" coveredelements="0" complexity="0" loc="0" ncloc="0" packages="0" files="0" classes="0"/>
+<coverage generated="1711837794505" clover="3.2.0">
+  <project timestamp="1711837794505" name="All files">
+    <metrics statements="8" coveredstatements="8" conditionals="3" coveredconditionals="2" methods="2" coveredmethods="2" elements="13" coveredelements="12" complexity="0" loc="8" ncloc="8" packages="1" files="1" classes="1"/>
+    <file name="ship.js" path="/home/vboxuser/repos/battleship/src/ship.js">
+      <metrics statements="8" coveredstatements="8" conditionals="3" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <line num="3" count="2" type="stmt"/>
+      <line num="4" count="2" type="stmt"/>
+      <line num="5" count="2" type="stmt"/>
+      <line num="6" count="2" type="stmt"/>
+      <line num="10" count="5" type="stmt"/>
+      <line num="11" count="5" type="cond" truecount="2" falsecount="0"/>
+      <line num="12" count="2" type="stmt"/>
+      <line num="13" count="2" type="stmt"/>
+    </file>
   </project>
 </coverage>
