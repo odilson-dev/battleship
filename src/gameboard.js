@@ -43,13 +43,14 @@ export default class GameBoard {
     if (x < 0 || x >= this.size || y < 0 || y >= this.size) {
       throw new Error("Attack out of bounds.");
     }
-
     const target = this.grid[y][x];
     if (target === null) {
       console.log("Miss!");
+      return "Miss!";
     } else {
       target.hit();
       console.log(`Hit on ${target.name}!`);
+      return `Hit on ${target.name}!`;
     }
   }
 }

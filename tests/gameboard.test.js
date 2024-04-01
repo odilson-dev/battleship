@@ -77,3 +77,21 @@ describe("I try to add a ship on another ship", () => {
     );
   });
 });
+
+describe("Test the method receiveAttack", () => {
+  const board = new GameBoard(10);
+  const shipC = new Ship("Titan", 3);
+
+  board.placeShip(shipC, 3, 1, "horizontal");
+  it("Return value match miss when no ship is hit", () => {
+    expect(board.receiveAttack(2, 1)).toMatch(/Miss!/);
+  });
+
+  it("Return value match Hit on when a ship is hit", () => {
+    expect(board.receiveAttack(3, 1)).toMatch(/Hit on/);
+  });
+
+  it("Throw an error when we attack somewhere which is out of the bounds", () => {
+    expect(() => board.receiveAttack(-1, 45)).toThrow("Attack out of bounds.");
+  });
+});
