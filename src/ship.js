@@ -1,5 +1,5 @@
 export default class Ship {
-  constructor(name, length = 1) {
+  constructor(name, length) {
     this.name = name;
     this.hits = 0;
     this.length = length;
@@ -10,7 +10,6 @@ export default class Ship {
     this.hits++;
     if (this.hits === this.length) {
       this.isSunk = true;
-      console.log(`${this.name} has been sunk!`);
     }
   }
 }
