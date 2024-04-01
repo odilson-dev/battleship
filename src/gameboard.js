@@ -45,13 +45,19 @@ export default class GameBoard {
     }
     const target = this.grid[y][x];
     if (target === null) {
-      console.log("Miss!");
+      this.missedAttacks.push([y, x]);
       return "Miss!";
     } else {
       target.hit();
-      console.log(`Hit on ${target.name}!`);
       return `Hit on ${target.name}!`;
     }
+  }
+  haveAllShipsBeenSunk() {
+    const sunkData = this.ships.map((item) => {
+      return item.ship.isSunk;
+    });
+
+    return sunkData.every((x) => x === true);
   }
 }
 // range is a function that basically takes a number(n) and return a list of all integers from 0 to n excluded.

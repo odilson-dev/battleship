@@ -1,3 +1,4 @@
+import { before } from "lodash";
 import GameBoard from "../src/gameboard";
 import Ship from "../src/ship";
 
@@ -93,5 +94,32 @@ describe("Test the method receiveAttack", () => {
 
   it("Throw an error when we attack somewhere which is out of the bounds", () => {
     expect(() => board.receiveAttack(-1, 45)).toThrow("Attack out of bounds.");
+  });
+});
+
+describe("Gameboard should be able to report whether or not all of their ships have been sunk.", () => {
+  // Create the gameboard
+  const board = new GameBoard(10);
+
+  // Create the ships
+  const shipA = new Ship("Battleship", 2);
+  const shipB = new Ship("Titan", 2);
+
+  // Place ships somewhere on the board
+
+  board.placeShip(shipA, 0, 0, "horizontal");
+  board.placeShip(shipB, 1, 1, "vertical");
+
+  // Before each test all the two ships will receive a attack, as the ships length are two, all the ships will sunk on the second
+  beforeEach(() => {
+    board.receiveAttack(0, 0);
+    board.receiveAttack(1, 1);
+  });
+  it("Return false because all the ships haven't been sunk yet", () => {
+    expect(board.haveAllShipsBeenSunk()).toBe(false);
+  });
+
+  it("Return true because all the ships have been sunk now", () => {
+    expect(board.haveAllShipsBeenSunk()).toBe(true);
   });
 });
