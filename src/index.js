@@ -1,14 +1,12 @@
-import _ from "lodash";
-import "./style.css";
+import { displayBoard } from "./game";
 import GameBoard from "./gameboard";
-function component() {
-  const element = document.createElement("div");
-  element.classList.add("hello");
+import "./style.css";
 
-  // Lodash, now imported by this script
-  element.innerHTML = _.join(["Hello", "webpack"], " ");
+const playerBoard = new GameBoard(10);
+const computerBoard = new GameBoard(10);
 
-  return element;
-}
+const playerBoardPlace = document.getElementById("player-board");
+const computerBoardPlace = document.getElementById("computer-board");
 
-document.body.appendChild(component());
+displayBoard(playerBoard, playerBoardPlace);
+displayBoard(computerBoard, computerBoardPlace);
