@@ -14,6 +14,11 @@ export function displayBoard(gameboard, place) {
       row.forEach((cell) => {
         const cellElement = document.createElement("td");
         cellElement.classList.add("cell");
+        if (cell) {
+          cellElement.classList.remove("cell");
+          cellElement.classList.add("ship");
+        }
+
         rowElement.appendChild(cellElement);
       });
 

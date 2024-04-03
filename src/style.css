@@ -11,11 +11,14 @@
   width: 40px;
   height: 40px;
   border: 1px solid #333;
-
   font-size: 20px;
   cursor: pointer;
 }
 
 .cell:hover {
   background-color: #eee;
+}
+.ship {
+  border: 3px solid blue;
+  background-color: rgba(45, 199, 255, 0.62);
 }
