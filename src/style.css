@@ -22,3 +22,45 @@
   border: 3px solid blue;
   background-color: rgba(45, 199, 255, 0.62);
 }
+/* Missed cell */
+.missed {
+  position: relative;
+  background-color: #ebebeb;
+}
+
+.missed::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background-color: #343434; /* Color of the dot */
+  border-radius: 50%; /* Make it a circle */
+}
+
+/* Hit cell */
+.hit {
+  position: relative;
+  background-color: #ffe4df;
+}
+
+.hit::before,
+.hit::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 2px;
+  background-color: #f34628; /* Color of the cross */
+}
+
+.hit::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.hit::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}

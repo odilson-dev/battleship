@@ -15,6 +15,7 @@ export function displayBoard(gameboard, place) {
       row.forEach((cell) => {
         const cellElement = document.createElement("td");
         cellElement.classList.add("cell");
+        cellElement.classList.add("missed");
         cellElement.setAttribute("data-x", x);
         cellElement.setAttribute("data-y", y);
         x++;

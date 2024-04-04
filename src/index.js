@@ -15,3 +15,22 @@ const computerBoardPlace = document.getElementById("computer-board");
 
 displayBoard(playerBoard, playerBoardPlace);
 displayBoard(computerBoard, computerBoardPlace);
+
+allowPlayerToAttackComputer();
+function allowPlayerToAttackComputer() {
+  document.addEventListener("DOMContentLoaded", () => {
+    const allOpponentCells = Array.from(
+      computerBoardPlace.getElementsByClassName("cell")
+    );
+
+    allOpponentCells.forEach((element) => {
+      element.addEventListener("click", () => {
+        console.log(
+          `(${element.getAttribute("data-y")}, ${element.getAttribute(
+            "data-x"
+          )})`
+        );
+      });
+    });
+  });
+}
