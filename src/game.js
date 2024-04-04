@@ -1,5 +1,4 @@
-import GameBoard from "./gameboard";
-import { ComputerPlayer, Player } from "./player";
+import { ceil } from "lodash";
 
 class Game {
   constructor() {}
@@ -8,6 +7,7 @@ class Game {
 export function displayBoard(gameboard, place) {
   // This part of the code should be after the creation of the game boards and before rendering them
   document.addEventListener("DOMContentLoaded", () => {
+    let draggedElement;
     // Populate player's board
     gameboard.grid.forEach((row) => {
       const rowElement = document.createElement("tr");
@@ -17,6 +17,17 @@ export function displayBoard(gameboard, place) {
         if (cell) {
           cellElement.classList.remove("cell");
           cellElement.classList.add("ship");
+          cellElement.draggable = true;
+          cellElement.addEventListener("dragstart", (e) => {
+            draggedElement = e.target;
+          });
+        } else {
+          cellElement.addEventListener("dragover", (e) => {
+            e.preventDefault();
+          });
+          cellElement.addEventListener("drop", (e) => {
+            cellElement.appendChild(draggedElement);
+          });
         }
 
         rowElement.appendChild(cellElement);
