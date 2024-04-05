@@ -1,4 +1,4 @@
-export default class GameBoard {
+export class GameBoard {
   constructor(size = 10) {
     this.size = size;
     this.grid = Array.from({ length: size }, () => Array(size).fill(null));
@@ -87,6 +87,35 @@ export default class GameBoard {
       });
 
       // Populate computer's board
+    });
+  }
+}
+
+export class ComputerGameBoard extends GameBoard {
+  constructor() {
+    super();
+  }
+
+  allowPlayerToAttackComputer(computerBoardDOM) {
+    document.addEventListener("DOMContentLoaded", () => {
+      const allOpponentCells = Array.from(
+        computerBoardDOM.getElementsByClassName("cell")
+      );
+
+      allOpponentCells.forEach((element) => {
+        element.addEventListener("click", () => {
+          if (
+            this.receiveAttack(
+              element.getAttribute("data-x"),
+              element.getAttribute("data-y")
+            ) == "Miss!"
+          ) {
+            element.classList.add("missed");
+          } else {
+            element.classList.add("hit");
+          }
+        });
+      });
     });
   }
 }
