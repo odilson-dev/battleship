@@ -3,33 +3,39 @@ import GameBoard from "./gameboard";
 import Ship from "./ship";
 import "./style.css";
 
-const playerBoard = new GameBoard(10);
-const computerBoard = new GameBoard(10);
+const playerBoard = new GameBoard();
+const computerBoard = new GameBoard();
 
 const shipA = new Ship("Odi", 3);
 
 playerBoard.placeShip(shipA, 0, 0, "horizontal");
 
-const playerBoardPlace = document.getElementById("player-board");
-const computerBoardPlace = document.getElementById("computer-board");
+const playerBoardDOM = document.getElementById("player-board");
+const computerBoardDOM = document.getElementById("computer-board");
 
-displayBoard(playerBoard, playerBoardPlace);
-displayBoard(computerBoard, computerBoardPlace);
+playerBoard.displayBoard(playerBoardDOM);
+computerBoard.displayBoard(computerBoardDOM);
 
-allowPlayerToAttackComputer();
-function allowPlayerToAttackComputer() {
+allowPlayerToAttackComputer(computerBoard, computerBoardDOM);
+
+function allowPlayerToAttackComputer(computerBoard, computerBoardDOM) {
   document.addEventListener("DOMContentLoaded", () => {
     const allOpponentCells = Array.from(
-      computerBoardPlace.getElementsByClassName("cell")
+      computerBoardDOM.getElementsByClassName("cell")
     );
 
     allOpponentCells.forEach((element) => {
       element.addEventListener("click", () => {
-        console.log(
-          `(${element.getAttribute("data-y")}, ${element.getAttribute(
-            "data-x"
-          )})`
-        );
+        if (
+          computerBoard.receiveAttack(
+            element.getAttribute("data-x"),
+            element.getAttribute("data-y")
+          ) == "Miss!"
+        ) {
+          element.classList.add("missed");
+        } else {
+          element.classList.add("hit");
+        }
       });
     });
   });

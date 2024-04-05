@@ -1,5 +1,5 @@
 export default class GameBoard {
-  constructor(size) {
+  constructor(size = 10) {
     this.size = size;
     this.grid = Array.from({ length: size }, () => Array(size).fill(null));
     this.ships = [];
@@ -44,8 +44,9 @@ export default class GameBoard {
       throw new Error("Attack out of bounds.");
     }
     const target = this.grid[y][x];
+
     if (target === null) {
-      this.missedAttacks.push([y, x]);
+      this.missedAttacks.push([x, y]);
       return "Miss!";
     } else {
       target.hit();
@@ -58,6 +59,35 @@ export default class GameBoard {
     });
 
     return sunkData.every((x) => x === true);
+  }
+
+  displayBoard(place) {
+    // This part of the code should be after the creation of the game boards and before rendering them
+
+    document.addEventListener("DOMContentLoaded", () => {
+      let draggedElement;
+      // Populate player's board
+
+      let y = 0;
+      this.grid.forEach((row) => {
+        const rowElement = document.createElement("tr");
+        let x = 0;
+        row.forEach((cell) => {
+          const cellElement = document.createElement("td");
+
+          cellElement.classList.add("cell");
+          cellElement.setAttribute("data-x", x);
+          cellElement.setAttribute("data-y", y);
+          x++;
+
+          rowElement.appendChild(cellElement);
+        });
+        y++;
+        place.appendChild(rowElement);
+      });
+
+      // Populate computer's board
+    });
   }
 }
 // range is a function that basically takes a number(n) and return a list of all integers from 0 to n excluded.
