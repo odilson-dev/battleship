@@ -38,12 +38,13 @@ function improveHowUserPlaceShips() {
         if (playerBoard.canThisShipBePlacedHere(shipA, dataY, dataX)) {
           let posX = parseInt(dataX);
           let posY = parseInt(dataY);
-          for (let i = 0; i < shipA.length; i++) {
+          for (let i = 0; i < 2; i++) {
             if (shipA.direction === "horizontal") {
-              posX += i;
+              posX++;
             } else {
-              posY += i;
+              posY++;
             }
+            console.log(`PosX: ${posX}, PosY: ${posY}`);
             const ship = playerBoardDOM.querySelector(
               `td[data-x="${posX}"][data-y="${posY}"]`
             );
@@ -60,9 +61,9 @@ function improveHowUserPlaceShips() {
           let posY = parseInt(dataY);
           for (let i = 0; i < shipA.length; i++) {
             if (shipA.direction === "horizontal") {
-              posX += i;
+              posX++;
             } else {
-              posY += i;
+              posY++;
             }
             const ship = playerBoardDOM.querySelector(
               `td[data-x="${posX}"][data-y="${posY}"]`
