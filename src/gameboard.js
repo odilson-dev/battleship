@@ -5,15 +5,15 @@ export class GameBoard {
     this.ships = [];
     this.missedAttacks = [];
   }
-  placeShip(ship, x, y, direction) {
-    const shipPositions = [];
 
+  placeShip(ship, x, y) {
+    const shipPositions = [];
+    let posX = x;
+    let posY = y;
     for (let i = 0; i < ship.length; i++) {
-      let posX = x;
-      let posY = y;
-      if (direction === "horizontal") {
+      if (ship.direction === "horizontal") {
         posX += i;
-      } else if (direction === "vertical") {
+      } else if (ship.direction === "vertical") {
         posY += i;
       } else {
         throw new Error('Invalid direction. Use "horizontal" or "vertical".');
@@ -21,7 +21,10 @@ export class GameBoard {
       // Check if posX or posY are out of bounds of the grid
 
       if (
-        !(range(this.size).includes(posX) && range(this.size).includes(posY))
+        !(
+          range(this.size).includes(parseInt(x)) &&
+          range(this.size).includes(parseInt(y))
+        )
       ) {
         throw new Error("Ship placement out of bounds.");
       }
@@ -37,6 +40,40 @@ export class GameBoard {
     });
 
     this.ships.push({ ship, shipPositions });
+  }
+  // This method checks whether it is possible to place ships from a coordinnate, it does almost the same thing as placeShip but it's just for test
+  canThisShipBePlacedHere(ship, x, y) {
+    let posX = parseInt(x);
+    let posY = parseInt(y);
+
+    for (let i = 0; i < ship.length; i++) {
+      if (ship.direction === "horizontal") {
+        posX += i;
+      } else if (ship.direction === "vertical") {
+        posY += i;
+      } else {
+        console.log("Invalid direction. Use 'horizontal' or 'vertical'");
+        return false;
+      }
+
+      if (
+        !(
+          range(this.size).includes(parseInt(posX)) &&
+          range(this.size).includes(parseInt(posY))
+        )
+      ) {
+        console.log("Ship placement out of bounds.");
+        return false;
+      }
+      // Check if another ship is placed at the possX and posY
+      else if (this.grid[posY][posX] !== null) {
+        console.log(`PosX: ${posX}, ${posY}`);
+        console.log("Another ship is already placed here.");
+        return false;
+      }
+    }
+    console.log("Ok");
+    return true;
   }
 
   receiveAttack(x, y) {
