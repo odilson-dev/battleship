@@ -42,20 +42,11 @@ export class GameBoard {
     this.ships.push({ ship, shipPositions });
   }
   // This method checks whether it is possible to place ships from a coordinnate, it does almost the same thing as placeShip but it's just for test
-  canThisShipBePlacedHere(ship, x, y) {
+  canThisShipBePlacedHere(ship, y, x) {
     let posX = parseInt(x);
     let posY = parseInt(y);
 
     for (let i = 0; i < ship.length; i++) {
-      if (ship.direction === "horizontal") {
-        posX += i;
-      } else if (ship.direction === "vertical") {
-        posY += i;
-      } else {
-        console.log("Invalid direction. Use 'horizontal' or 'vertical'");
-        return false;
-      }
-
       if (isPositionWithinBounds(posX, posY)) {
         console.log("Ship placement out of bounds.");
         return false;
@@ -64,6 +55,14 @@ export class GameBoard {
       else if (this.grid[posY][posX] !== null) {
         console.log(`PosX: ${posX}, ${posY}`);
         console.log("Another ship is already placed here.");
+        return false;
+      }
+      if (ship.direction === "horizontal") {
+        posX++;
+      } else if (ship.direction === "vertical") {
+        posY++;
+      } else {
+        console.log("Invalid direction. Use 'horizontal' or 'vertical'");
         return false;
       }
     }

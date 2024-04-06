@@ -15,9 +15,9 @@
   cursor: pointer;
 }
 
-.cell:hover {
+/* .cell:hover {
   background-color: #eee;
-}
+} */
 .ship {
   background-color: rgba(45, 199, 255, 0.62);
 }
