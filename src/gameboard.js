@@ -56,12 +56,7 @@ export class GameBoard {
         return false;
       }
 
-      if (
-        !(
-          range(this.size).includes(parseInt(posX)) &&
-          range(this.size).includes(parseInt(posY))
-        )
-      ) {
+      if (isPositionWithinBounds(posX, posY)) {
         console.log("Ship placement out of bounds.");
         return false;
       }
@@ -155,6 +150,12 @@ export class ComputerGameBoard extends GameBoard {
       });
     });
   }
+}
+
+export function isPositionWithinBounds(posX, posY) {
+  return !(
+    range(10).includes(parseInt(posX)) && range(10).includes(parseInt(posY))
+  );
 }
 // range is a function that basically takes a number(n) and return a list of all integers from 0 to n excluded.
 function range(n) {

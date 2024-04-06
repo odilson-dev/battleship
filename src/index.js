@@ -38,18 +38,34 @@ function improveHowUserPlaceShips() {
         if (playerBoard.canThisShipBePlacedHere(shipA, dataY, dataX)) {
           let posX = parseInt(dataX);
           let posY = parseInt(dataY);
+          for (let i = 0; i < shipA.length; i++) {
+            if (shipA.direction === "horizontal") {
+              posX++;
+            } else {
+              posY++;
+            }
+
+            const ship = playerBoardDOM.querySelector(
+              `td[data-x="${posX}"][data-y="${posY}"]`
+            );
+
+            ship.classList.add("ship-position-allowed");
+          }
+        } else {
+          let posX = parseInt(dataX);
+          let posY = parseInt(dataY);
           for (let i = 0; i < 2; i++) {
             if (shipA.direction === "horizontal") {
               posX++;
             } else {
               posY++;
             }
-            console.log(`PosX: ${posX}, PosY: ${posY}`);
+
             const ship = playerBoardDOM.querySelector(
               `td[data-x="${posX}"][data-y="${posY}"]`
             );
 
-            ship.classList.add("ship");
+            ship.classList.add("ship-position-prohibited");
           }
         }
       });
@@ -68,7 +84,22 @@ function improveHowUserPlaceShips() {
             const ship = playerBoardDOM.querySelector(
               `td[data-x="${posX}"][data-y="${posY}"]`
             );
-            ship.classList.remove("ship");
+            ship.classList.remove("ship-position-allowed");
+          }
+        } else {
+          let posX = parseInt(dataX);
+          let posY = parseInt(dataY);
+          for (let i = 0; i < shipA.length; i++) {
+            if (shipA.direction === "horizontal") {
+              posX++;
+            } else {
+              posY++;
+            }
+            const ship = playerBoardDOM.querySelector(
+              `td[data-x="${posX}"][data-y="${posY}"]`
+            );
+
+            ship.classList.remove("ship-position-prohibited");
           }
         }
       });
