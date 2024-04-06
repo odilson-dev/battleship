@@ -35,7 +35,41 @@ function improveHowUserPlaceShips() {
       cell.addEventListener("mouseover", () => {
         const dataX = cell.getAttribute("data-x");
         const dataY = cell.getAttribute("data-y");
-        playerBoard.canThisShipBePlacedHere(shipA, dataY, dataX);
+        if (playerBoard.canThisShipBePlacedHere(shipA, dataY, dataX)) {
+          let posX = parseInt(dataX);
+          let posY = parseInt(dataY);
+          for (let i = 0; i < shipA.length; i++) {
+            if (shipA.direction === "horizontal") {
+              posX += i;
+            } else {
+              posY += i;
+            }
+            const ship = playerBoardDOM.querySelector(
+              `td[data-x="${posX}"][data-y="${posY}"]`
+            );
+
+            ship.classList.add("ship");
+          }
+        }
+      });
+      cell.addEventListener("mouseout", () => {
+        const dataX = cell.getAttribute("data-x");
+        const dataY = cell.getAttribute("data-y");
+        if (playerBoard.canThisShipBePlacedHere(shipA, dataY, dataX)) {
+          let posX = parseInt(dataX);
+          let posY = parseInt(dataY);
+          for (let i = 0; i < shipA.length; i++) {
+            if (shipA.direction === "horizontal") {
+              posX += i;
+            } else {
+              posY += i;
+            }
+            const ship = playerBoardDOM.querySelector(
+              `td[data-x="${posX}"][data-y="${posY}"]`
+            );
+            ship.classList.remove("ship");
+          }
+        }
       });
     }
   });
