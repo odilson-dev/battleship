@@ -1,9 +1,8 @@
-import { before } from "lodash";
-import GameBoard from "../src/gameboard";
+import { GameBoard } from "../src/gameboard";
 import Ship from "../src/ship";
 
 describe("Test a GameBoard object", () => {
-  const board = new GameBoard(10);
+  const board = new GameBoard();
 
   it("Expect the position[0][0] to be falsy", () => {
     expect(board.grid[0][0]).toBeFalsy();
@@ -15,10 +14,10 @@ describe("Test a GameBoard object", () => {
 });
 
 describe("Test the method placeShip from GameBoard", () => {
-  const shipA = new Ship("Battleship", 3);
-  const board = new GameBoard(10);
+  const shipA = new Ship("Battleship", 3, "horizontal");
+  const board = new GameBoard();
 
-  board.placeShip(shipA, 0, 0, "horizontal");
+  board.placeShip(shipA, 0, 0);
 
   it("Expect the position[0][0] to be truthy", () => {
     expect(board.grid[0][0]).toBeTruthy();
@@ -50,8 +49,8 @@ describe("Test the method placeShip from GameBoard", () => {
 });
 
 describe("We try to place a ship out of bound", () => {
-  const shipB = new Ship("Warrior", 3);
-  const board = new GameBoard(10);
+  const shipB = new Ship("Warrior", 3, "horizontal");
+  const board = new GameBoard();
 
   it("Throw an error when the ship placement is out of bounds", () => {
     expect(() => board.placeShip(shipB, 10, 0, "vertical")).toThrow(
@@ -67,13 +66,13 @@ describe("We try to place a ship out of bound", () => {
 });
 
 describe("I try to add a ship on another ship", () => {
-  const shipA = new Ship("Battleship", 3);
-  const shipB = new Ship("Warrior", 3);
+  const shipA = new Ship("Battleship", 3, "horizontal");
+  const shipB = new Ship("Warrior", 3, "vertical");
   const board = new GameBoard(10);
 
-  board.placeShip(shipA, 0, 0, "horizontal");
+  board.placeShip(shipA, 0, 0);
   it("Throw an error when you place a ship on another ship", () => {
-    expect(() => board.placeShip(shipB, 0, 0, "vertical")).toThrow(
+    expect(() => board.placeShip(shipB, 0, 0)).toThrow(
       "Another ship is already placed here."
     );
   });
@@ -81,9 +80,9 @@ describe("I try to add a ship on another ship", () => {
 
 describe("Test the method receiveAttack", () => {
   const board = new GameBoard(10);
-  const shipC = new Ship("Titan", 3);
+  const shipC = new Ship("Titan", 3, "horizontal");
 
-  board.placeShip(shipC, 3, 1, "horizontal");
+  board.placeShip(shipC, 3, 1);
   it("Return value match miss when no ship is hit", () => {
     expect(board.receiveAttack(2, 1)).toMatch(/Miss!/);
   });
@@ -102,13 +101,13 @@ describe("Gameboard should be able to report whether or not all of their ships h
   const board = new GameBoard(10);
 
   // Create the ships
-  const shipA = new Ship("Battleship", 2);
-  const shipB = new Ship("Titan", 2);
+  const shipA = new Ship("Battleship", 2, "horizontal");
+  const shipB = new Ship("Titan", 2, "vertical");
 
   // Place ships somewhere on the board
 
-  board.placeShip(shipA, 0, 0, "horizontal");
-  board.placeShip(shipB, 1, 1, "vertical");
+  board.placeShip(shipA, 0, 0);
+  board.placeShip(shipB, 1, 1);
 
   // Before each test all the two ships will receive a attack, as the ships length are two, all the ships will sunk on the second
   beforeEach(() => {

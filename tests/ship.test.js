@@ -1,7 +1,7 @@
 import Ship from "../src/ship";
 
 describe("Test whether number of Hits increase correctly after each hits", () => {
-  const myShip = new Ship("Battleship", 3);
+  const myShip = new Ship("Battleship", 3, "direction");
   beforeEach(() => {
     myShip.hit();
   });
@@ -20,7 +20,7 @@ describe("Test whether number of Hits increase correctly after each hits", () =>
 });
 
 describe("Test the isSunk method", () => {
-  const myShip = new Ship("Battleship", 2);
+  const myShip = new Ship("Battleship", 2, "direction");
 
   beforeEach(() => {
     myShip.hit();
