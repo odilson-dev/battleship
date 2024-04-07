@@ -1,5 +1,5 @@
 export default class Ship {
-  constructor(name, length, direction) {
+  constructor(name, length, direction = "horizontal") {
     this.name = name;
     this.hits = 0;
     this.length = length;
