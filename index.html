@@ -10,19 +10,41 @@
 
     <script src="bundle.js" defer></script>
   </head>
-  <header>
-    <h1>
-      Battleship
-      <a
-        href="https://github.com/odilsoncode/battleship"
-        target="_blank"
-        rel="noopener noreferrer"
-        ><i class="bx bxl-github"></i
-      ></a>
-    </h1>
-  </header>
+
   <body>
-    <button id="ship-direction">horizontal</button>
+    <header>
+      <h1>
+        Battleship
+        <a
+          href="https://github.com/odilsoncode/battleship"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><i class="bx bxl-github"></i
+        ></a>
+      </h1>
+    </header>
+    <div class="box-info">
+      <div class="player-box">
+        <div class="title">Player</div>
+        <div class="state">
+          <p>Place your pieces</p>
+          <div class="current-state">
+            <button id="ship-direction">horizontal</button>
+            <p id="ship-left-to-place">6 ships left to place</p>
+          </div>
+        </div>
+      </div>
+      <div class="computer-box">
+        <div class="title">Computer</div>
+        <div class="state">
+          <p>Waiting...</p>
+          <div class="current-state">
+            <p>Waiting for you to place your ships</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="board-container">
       <table id="player-board" class="board">
         <caption>
