@@ -46,17 +46,52 @@
     </div>
 
     <div class="board-container">
-      <table id="player-board" class="board">
-        <caption>
-          Your grid
-        </caption>
-      </table>
-      <table id="computer-board" class="board">
-        <caption>
-          Computer Grid
-        </caption>
-      </table>
+      <table id="player-board" class="board"></table>
+      <table id="computer-board" class="board"></table>
     </div>
+    <dialog id="dialog">
+      <h1>Welcome to Battleship</h1>
+      <h2>Instructions</h2>
+      <p>The game is played against the Computer.</p>
+      <p>
+        Begin by positioning your ships on the board, to do that, hover over
+        your board,<br />
+        choose the best direction for your ship and add it to the board by a
+        simple click
+      </p>
+      <ul>
+        <li>
+          <div
+            class="cell ship-position-prohibited"
+            style="display: inline-block; margin-right: 5px"
+          ></div>
+          Position not allowed
+        </li>
+        <li>
+          <div
+            class="cell ship-position-allowed"
+            style="display: inline-block; margin-right: 5px"
+          ></div>
+          Position allowed
+        </li>
+        <li>
+          <div
+            class="cell ship"
+            style="display: inline-block; margin-right: 5px"
+          ></div>
+          Ship well added
+        </li>
+      </ul>
+
+      <p>
+        Once all ships are positioned, confirm your setup to start the game.
+      </p>
+
+      <button class="close">Close</button>
+    </dialog>
+
+    <button class="show">Show Modal</button>
+
     <footer>
       <p>
         Made by
