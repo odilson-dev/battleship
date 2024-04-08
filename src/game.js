@@ -127,28 +127,43 @@ export class Game {
       const dataX = cell.getAttribute("data-x");
       const dataY = cell.getAttribute("data-y");
 
-      const shipDetails = this.playerShipNamesAndLength.shift();
-      console.log(shipDetails);
-      const shipA = new Ship(...shipDetails);
-      shipA.direction = this.shipDirectionButton.textContent;
+      // Check if the ship can be placed at the position dataX and dataY
+      if (
+        this.playerBoard.canThisShipBePlacedHere(
+          new Ship(
+            ...this.playerShipNamesAndLength[0],
+            this.shipDirectionButton.textContent
+          ),
+          dataY,
+          dataX
+        )
+      ) {
+        const shipDetails = this.playerShipNamesAndLength.shift();
+        console.log(shipDetails);
+        const shipA = new Ship(...shipDetails);
+        shipA.direction = this.shipDirectionButton.textContent;
 
-      if (this.playerBoard.canThisShipBePlacedHere(shipA, dataY, dataX)) {
-        this.playerBoard.placeShip(shipA, dataX, dataY);
+        if (this.playerBoard.canThisShipBePlacedHere(shipA, dataY, dataX)) {
+          this.playerBoard.placeShip(shipA, dataX, dataY);
 
-        let posX = parseInt(dataX);
-        let posY = parseInt(dataY);
-        for (let i = 0; i < shipA.length; i++) {
-          const ship = this.playerBoardDOM.querySelector(
-            `td[data-x="${posX}"][data-y="${posY}"]`
-          );
-          ship.classList.remove("ship-position-allowed");
+          let posX = parseInt(dataX);
+          let posY = parseInt(dataY);
+          for (let i = 0; i < shipA.length; i++) {
+            const ship = this.playerBoardDOM.querySelector(
+              `td[data-x="${posX}"][data-y="${posY}"]`
+            );
+            ship.classList.remove("ship-position-allowed");
 
-          ship.classList.add("ship");
-          if (shipA.direction === "horizontal") {
-            posX++;
-          } else {
-            posY++;
+            ship.classList.add("ship");
+            if (shipA.direction === "horizontal") {
+              posX++;
+            } else {
+              posY++;
+            }
           }
+          document.getElementById(
+            "ship-left-to-place"
+          ).textContent = `${this.playerShipNamesAndLength.length} ships left to place`;
         }
       }
     });
