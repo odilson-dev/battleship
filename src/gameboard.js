@@ -1,3 +1,6 @@
+// Set to store unique pairs of numbers
+const chosenPairs = new Set();
+
 export class GameBoard {
   constructor(size = 10) {
     this.size = size;
@@ -122,7 +125,7 @@ export class ComputerGameBoard extends GameBoard {
     super();
   }
 
-  allowPlayerToAttackComputer(computerBoardDOM) {
+  allowPlayerToAttackComputer(computerBoardDOM, playerBoard, playerBoardDOM) {
     const allOpponentCells = Array.from(
       computerBoardDOM.getElementsByClassName("cell")
     );
@@ -140,15 +143,28 @@ export class ComputerGameBoard extends GameBoard {
       }
 
       // Remove the click event listener after clicking
-      allOpponentCells.forEach((opponentCell) => {
-        opponentCell.removeEventListener("click", clickHandler);
-      });
+      // allOpponentCells.forEach((opponentCell) => {
+      //   opponentCell.removeEventListener("click", clickHandler);
+      // });
+      this.attackPlayerBoard(playerBoard, playerBoardDOM);
     };
 
     // Add click event listener to each element
     allOpponentCells.forEach((element) => {
       element.addEventListener("click", clickHandler);
     });
+  }
+  attackPlayerBoard(playerBoard, playerBoardDOM) {
+    const [x, y] = chooseRandomNumbers();
+    if (playerBoard.receiveAttack(x, y) == "Miss!") {
+      playerBoardDOM
+        .querySelector(`td[data-x="${x}"][data-y="${y}"]`)
+        .classList.add("missed");
+    } else {
+      playerBoardDOM
+        .querySelector(`td[data-x="${x}"][data-y="${y}"]`)
+        .classList.add("hit");
+    }
   }
 }
 
@@ -164,4 +180,21 @@ function range(n) {
     ans.push(i);
   }
   return ans;
+}
+
+// Function to choose two random numbers
+function chooseRandomNumbers() {
+  let randomNumber1, randomNumber2;
+
+  // Generate unique random numbers
+  do {
+    randomNumber1 = Math.floor(Math.random() * 10);
+    randomNumber2 = Math.floor(Math.random() * 10);
+  } while (chosenPairs.has(`${randomNumber1}-${randomNumber2}`));
+
+  // Add the chosen pair to the set
+  chosenPairs.add(`${randomNumber1}-${randomNumber2}`);
+
+  // Return the chosen pair
+  return [randomNumber1, randomNumber2];
 }

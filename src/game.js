@@ -9,6 +9,7 @@ export class Game {
     // These represents the players GameBoards on the DOM
     this.playerBoardDOM = document.getElementById("player-board");
     this.computerBoardDOM = document.getElementById("computer-board");
+    this.currentPlayer = "player";
     this.playerShipNamesAndLength = [
       ["Battleship", 5],
       ["Kraken", 4],
@@ -180,7 +181,13 @@ export class Game {
   }
   startGame() {
     const shipB = new Ship("Buto", 3, "vertical");
-    this.computerBoard.allowPlayerToAttackComputer(this.computerBoardDOM);
     this.computerBoard.placeShip(shipB, 0, 0);
+
+    this.computerBoard.allowPlayerToAttackComputer(
+      this.computerBoardDOM,
+      this.playerBoard,
+      this.playerBoardDOM
+    );
+    // Check if a player has Won
   }
 }
