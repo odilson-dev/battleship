@@ -165,6 +165,10 @@ export class Game {
               } else {
                 posY++;
               }
+
+              if (this.playerShipNamesAndLength.length == 0) {
+                this.startGame();
+              }
             }
             document.getElementById(
               "ship-left-to-place"
@@ -173,5 +177,10 @@ export class Game {
         }
       }
     });
+  }
+  startGame() {
+    const shipB = new Ship("Buto", 3, "vertical");
+    this.computerBoard.allowPlayerToAttackComputer(this.computerBoardDOM);
+    this.computerBoard.placeShip(shipB, 0, 0);
   }
 }

@@ -13,7 +13,7 @@ const battleshipGame = new Game();
 battleshipGame.setUpBoards();
 
 const shipDirectionButton = document.getElementById("ship-direction");
-dialogElem.showModal();
+// dialogElem.showModal();
 shipDirectionButton.addEventListener("click", () => {
   if (shipDirectionButton.textContent == "horizontal") {
     shipDirectionButton.textContent = "vertical";
@@ -21,5 +21,3 @@ shipDirectionButton.addEventListener("click", () => {
     shipDirectionButton.textContent = "horizontal";
   }
 });
-
-computerBoard.allowPlayerToAttackComputer(computerBoardDOM);

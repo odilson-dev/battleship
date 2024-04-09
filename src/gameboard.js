@@ -123,25 +123,31 @@ export class ComputerGameBoard extends GameBoard {
   }
 
   allowPlayerToAttackComputer(computerBoardDOM) {
-    document.addEventListener("DOMContentLoaded", () => {
-      const allOpponentCells = Array.from(
-        computerBoardDOM.getElementsByClassName("cell")
-      );
+    const allOpponentCells = Array.from(
+      computerBoardDOM.getElementsByClassName("cell")
+    );
+    // Define the click event handler function
+    const clickHandler = (event) => {
+      if (
+        this.receiveAttack(
+          event.target.getAttribute("data-x"),
+          event.target.getAttribute("data-y")
+        ) == "Miss!"
+      ) {
+        event.target.classList.add("missed");
+      } else {
+        event.target.classList.add("hit");
+      }
 
-      allOpponentCells.forEach((element) => {
-        element.addEventListener("click", () => {
-          if (
-            this.receiveAttack(
-              element.getAttribute("data-x"),
-              element.getAttribute("data-y")
-            ) == "Miss!"
-          ) {
-            element.classList.add("missed");
-          } else {
-            element.classList.add("hit");
-          }
-        });
+      // Remove the click event listener after clicking
+      allOpponentCells.forEach((opponentCell) => {
+        opponentCell.removeEventListener("click", clickHandler);
       });
+    };
+
+    // Add click event listener to each element
+    allOpponentCells.forEach((element) => {
+      element.addEventListener("click", clickHandler);
     });
   }
 }
