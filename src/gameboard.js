@@ -94,9 +94,6 @@ export class GameBoard {
   displayBoard(place) {
     // This part of the code should be after the creation of the game boards and before rendering them
 
-    let draggedElement;
-    // Populate player's board
-
     let y = 0;
     this.grid.forEach((row) => {
       const rowElement = document.createElement("tr");
@@ -120,6 +117,7 @@ export class GameBoard {
 export class ComputerGameBoard extends GameBoard {
   constructor() {
     super();
+    this.countAttackReceived = 0;
   }
 
   allowPlayerToAttackComputer(computerBoardDOM, playerBoard, playerBoardDOM) {
@@ -128,6 +126,7 @@ export class ComputerGameBoard extends GameBoard {
     );
     // Define the click event handler function
     const clickHandler = (event) => {
+      this.countAttackReceived++;
       if (
         this.receiveAttack(
           event.target.getAttribute("data-x"),
@@ -143,11 +142,16 @@ export class ComputerGameBoard extends GameBoard {
           gameOverDialog.showModal();
         }
       }
+      playAudio();
 
       // Remove the click event listener after clicking
       // allOpponentCells.forEach((opponentCell) => {
       //   opponentCell.removeEventListener("click", clickHandler);
       // });
+      if (this.countAttackReceived % 5 == 0) {
+        let audio = new Audio(`sounds/incoming_missile.mp3`);
+        audio.play();
+      }
       this.attackPlayerBoard(playerBoard, playerBoardDOM);
     };
 
@@ -157,20 +161,24 @@ export class ComputerGameBoard extends GameBoard {
     });
   }
   attackPlayerBoard(playerBoard, playerBoardDOM) {
-    const [x, y] = chooseRandomNumbers();
-    if (playerBoard.receiveAttack(x, y) == "Miss!") {
-      playerBoardDOM
-        .querySelector(`td[data-x="${x}"][data-y="${y}"]`)
-        .classList.add("missed");
-    } else {
-      playerBoardDOM
-        .querySelector(`td[data-x="${x}"][data-y="${y}"]`)
-        .classList.add("hit");
-    }
-    if (playerBoard.haveAllShipsBeenSunk()) {
-      gameOverDialog.querySelector("h2").textContent = "Sorry, you lose!!!";
-      gameOverDialog.showModal();
-    }
+    setTimeout(() => {
+      const [x, y] = chooseRandomNumbers();
+      if (playerBoard.receiveAttack(x, y) == "Miss!") {
+        playerBoardDOM
+          .querySelector(`td[data-x="${x}"][data-y="${y}"]`)
+          .classList.add("missed");
+      } else {
+        playerBoardDOM
+          .querySelector(`td[data-x="${x}"][data-y="${y}"]`)
+          .classList.add("hit");
+        let audio = new Audio(`sounds/hit.mp3`);
+        audio.play();
+      }
+      if (playerBoard.haveAllShipsBeenSunk()) {
+        gameOverDialog.querySelector("h2").textContent = "Sorry, you lose!!!";
+        gameOverDialog.showModal();
+      }
+    }, 1500);
   }
 }
 
@@ -203,4 +211,12 @@ function chooseRandomNumbers() {
 
   // Return the chosen pair
   return [randomNumber1, randomNumber2];
+}
+
+function playAudio() {
+  let n = Math.floor(Math.random() * 10) + 1;
+  console.log(n);
+  let audio = new Audio(`sounds/son${n}.mp3`);
+
+  audio.play();
 }
