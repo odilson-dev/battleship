@@ -140,6 +140,7 @@ export class ComputerGameBoard extends GameBoard {
           gameOverDialog.querySelector("h2").textContent =
             "Congratulations, you Win!!!";
           gameOverDialog.showModal();
+          playGameOver();
         }
       }
       playAudio();
@@ -177,6 +178,7 @@ export class ComputerGameBoard extends GameBoard {
       if (playerBoard.haveAllShipsBeenSunk()) {
         gameOverDialog.querySelector("h2").textContent = "Sorry, you lose!!!";
         gameOverDialog.showModal();
+        playGameOver();
       }
     }, 1500);
   }
@@ -218,5 +220,10 @@ function playAudio() {
   console.log(n);
   let audio = new Audio(`sounds/son${n}.mp3`);
 
+  audio.play();
+}
+
+function playGameOver() {
+  let audio = new Audio(`sounds/gameover.mp3`);
   audio.play();
 }
