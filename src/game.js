@@ -27,16 +27,13 @@ export class Game {
   }
 
   startPlaceShipProcess() {
-    document.addEventListener("DOMContentLoaded", () => {
-      const allCells = this.playerBoardDOM.querySelectorAll(".cell");
+    const allCells = this.playerBoardDOM.querySelectorAll(".cell");
 
-      for (const cell of allCells) {
-        this.addMouseOverEffectOn(cell);
-
-        this.addMouseOutEffectOn(cell);
-        this.addClickEffectOn(cell);
-      }
-    });
+    for (const cell of allCells) {
+      this.addMouseOverEffectOn(cell);
+      this.addMouseOutEffectOn(cell);
+      this.addClickEffectOn(cell);
+    }
   }
   addMouseOverEffectOn(cell) {
     cell.addEventListener("mouseover", () => {

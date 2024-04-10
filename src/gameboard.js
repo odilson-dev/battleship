@@ -1,5 +1,6 @@
 // Set to store unique pairs of numbers
 const chosenPairs = new Set();
+const gameOverDialog = document.getElementById("gameOverDialog");
 
 export class GameBoard {
   constructor(size = 10) {
@@ -93,29 +94,25 @@ export class GameBoard {
   displayBoard(place) {
     // This part of the code should be after the creation of the game boards and before rendering them
 
-    document.addEventListener("DOMContentLoaded", () => {
-      let draggedElement;
-      // Populate player's board
+    let draggedElement;
+    // Populate player's board
 
-      let y = 0;
-      this.grid.forEach((row) => {
-        const rowElement = document.createElement("tr");
-        let x = 0;
-        row.forEach((cell) => {
-          const cellElement = document.createElement("td");
+    let y = 0;
+    this.grid.forEach((row) => {
+      const rowElement = document.createElement("tr");
+      let x = 0;
+      row.forEach((cell) => {
+        const cellElement = document.createElement("td");
 
-          cellElement.classList.add("cell");
-          cellElement.setAttribute("data-x", x);
-          cellElement.setAttribute("data-y", y);
-          x++;
+        cellElement.classList.add("cell");
+        cellElement.setAttribute("data-x", x);
+        cellElement.setAttribute("data-y", y);
+        x++;
 
-          rowElement.appendChild(cellElement);
-        });
-        y++;
-        place.appendChild(rowElement);
+        rowElement.appendChild(cellElement);
       });
-
-      // Populate computer's board
+      y++;
+      place.appendChild(rowElement);
     });
   }
 }
@@ -140,6 +137,11 @@ export class ComputerGameBoard extends GameBoard {
         event.target.classList.add("missed");
       } else {
         event.target.classList.add("hit");
+        if (this.haveAllShipsBeenSunk()) {
+          gameOverDialog.querySelector("h2").textContent =
+            "Congratulations, you Win!!!";
+          gameOverDialog.showModal();
+        }
       }
 
       // Remove the click event listener after clicking
@@ -164,6 +166,10 @@ export class ComputerGameBoard extends GameBoard {
       playerBoardDOM
         .querySelector(`td[data-x="${x}"][data-y="${y}"]`)
         .classList.add("hit");
+    }
+    if (playerBoard.haveAllShipsBeenSunk()) {
+      gameOverDialog.querySelector("h2").textContent = "Sorry, you lose!!!";
+      gameOverDialog.showModal();
     }
   }
 }
