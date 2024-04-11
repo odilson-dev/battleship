@@ -204,10 +204,18 @@ export class Game {
     });
   }
   startGame() {
-    const shipB = new Ship("Buto", 3, "vertical");
-    const shipC = new Ship("But", 2, "horizontal");
-    this.computerBoard.placeShip(shipB, 0, 0);
-    // this.computerBoard.placeShip(shipC, 1, 1);
+    const shipA = new Ship("Titan", 5, "vertical");
+    const shipB = new Ship("Kalipzo", 4, "horizontal");
+    const shipC = new Ship("Iyo", 3, "vertical");
+    const shipD = new Ship("Franck", 2, "horizontal");
+    const shipE = new Ship("Titan2", 2, "vertical");
+    const shipF = new Ship("Strong", 1, "horizontal");
+    this.computerBoard.placeShip(shipA, 0, 0);
+    this.computerBoard.placeShip(shipB, 4, 0);
+    this.computerBoard.placeShip(shipC, 3, 3);
+    this.computerBoard.placeShip(shipD, 4, 6);
+    this.computerBoard.placeShip(shipE, 7, 7);
+    this.computerBoard.placeShip(shipF, 8, 8);
 
     this.computerBoard.allowPlayerToAttackComputer(
       this.computerBoardDOM,
