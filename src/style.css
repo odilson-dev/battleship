@@ -217,3 +217,19 @@ button.replay:hover {
   text-align: center;
   font-family: Astronomus;
 }
+footer p,
+footer a {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: #ebebeb;
+}
+footer {
+  margin-top: 70px;
+  padding: 30px 0px;
+  background-color: #333;
+}
+.red-heart {
+  color: red; /* Change the color */
+  font-size: 30px; /* Change the size */
+}

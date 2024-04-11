@@ -12,13 +12,13 @@ closeBtn.addEventListener("click", () => {
   dialogElem.close();
 });
 
-replayBtn.addEventListener("click", play);
+replayBtn.addEventListener("click", playTurn);
 
 const battleshipGame = new Game();
 
 battleshipGame.setUpBoards();
 
-function play() {
+function playTurn() {
   gameOverDialog.close();
   playerBoardDOM.textContent = "";
   computerBoardDOM.textContent = "";

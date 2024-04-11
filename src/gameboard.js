@@ -126,6 +126,7 @@ export class ComputerGameBoard extends GameBoard {
     );
     // Define the click event handler function
     const clickHandler = (event) => {
+      playAudio();
       this.countAttackReceived++;
       if (
         this.receiveAttack(
@@ -137,13 +138,14 @@ export class ComputerGameBoard extends GameBoard {
       } else {
         event.target.classList.add("hit");
         if (this.haveAllShipsBeenSunk()) {
+          playGameOver();
           gameOverDialog.querySelector("h2").textContent =
             "Congratulations, you Win!!!";
           gameOverDialog.showModal();
-          playGameOver();
+
+          return;
         }
       }
-      playAudio();
 
       // Remove the click event listener after clicking
       // allOpponentCells.forEach((opponentCell) => {
