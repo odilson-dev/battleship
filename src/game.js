@@ -203,20 +203,33 @@ export class Game {
       }
     });
   }
-  startGame() {
-    const shipA = new Ship("Titan", 5, "vertical");
-    const shipB = new Ship("Kalipzo", 4, "horizontal");
-    const shipC = new Ship("Iyo", 3, "vertical");
-    const shipD = new Ship("Franck", 2, "horizontal");
-    const shipE = new Ship("Titan2", 2, "vertical");
-    const shipF = new Ship("Strong", 1, "horizontal");
-    this.computerBoard.placeShip(shipA, 0, 0);
-    this.computerBoard.placeShip(shipB, 4, 0);
-    this.computerBoard.placeShip(shipC, 3, 3);
-    this.computerBoard.placeShip(shipD, 4, 6);
-    this.computerBoard.placeShip(shipE, 7, 7);
-    this.computerBoard.placeShip(shipF, 8, 8);
 
+  placeComputerShip() {
+    const shipList = [
+      new Ship("Titan", 5, "vertical"),
+      new Ship("Carl", 4, "horizontal"),
+      new Ship("Iyo", 3, "vertical"),
+      new Ship("Franck", 2, "horizontal"),
+      new Ship("Titan2", 2, "vertical"),
+      new Ship("Strong", 1, "horizontal"),
+    ];
+
+    shipList.forEach((shipItem) => {
+      let placed = false;
+
+      while (!placed) {
+        try {
+          this.computerBoard.placeShip(shipItem, ...randomPosition());
+          placed = true; // Set placed to true if ship placement is successful
+        } catch (error) {
+          continue;
+        }
+      }
+    });
+  }
+
+  startGame() {
+    this.placeComputerShip();
     this.computerBoard.allowPlayerToAttackComputer(
       this.computerBoardDOM,
       this.playerBoard,
@@ -224,4 +237,8 @@ export class Game {
     );
     // Check if a player has Won
   }
+}
+
+function randomPosition() {
+  return [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
 }
