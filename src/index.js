@@ -7,21 +7,61 @@ const replayBtn = document.querySelector(".replay");
 const gameOverDialog = document.getElementById("gameOverDialog");
 const playerBoardDOM = document.getElementById("player-board");
 const computerBoardDOM = document.getElementById("computer-board");
+const playerLabel = document.querySelector(".player-label");
+const computerLabel = document.querySelector(".computer-label");
 
 closeBtn.addEventListener("click", () => {
   dialogElem.close();
 });
 
-replayBtn.addEventListener("click", playTurn);
+replayBtn.addEventListener("click", start);
 
-const battleshipGame = new Game();
+dialogElem.showModal();
 
-battleshipGame.setUpBoards();
+start();
 
-function playTurn() {
+function start() {
   gameOverDialog.close();
   playerBoardDOM.textContent = "";
   computerBoardDOM.textContent = "";
+  playerLabel.textContent = "";
+  computerLabel.textContent = "";
+
+  const playerHeading = document.createElement("h3");
+  playerHeading.textContent = "Place your pieces";
+
+  const playerBoxDescription = document.createElement("div");
+  playerBoxDescription.classList.add("box-description");
+
+  const shipDirectionButton = document.createElement("button");
+  shipDirectionButton.setAttribute("id", "ship-direction");
+  shipDirectionButton.textContent = "horizontal";
+
+  const shipLeftToPlace = document.createElement("p");
+  shipLeftToPlace.setAttribute("id", "ship-left-to-place");
+  shipLeftToPlace.textContent = "6 ships left to place";
+
+  playerBoxDescription.appendChild(shipDirectionButton);
+  playerBoxDescription.appendChild(shipLeftToPlace);
+
+  playerLabel.appendChild(playerHeading);
+  playerLabel.appendChild(playerBoxDescription);
+
+  // Set up the computer label
+
+  const computerHeading = document.createElement("h3");
+  computerHeading.textContent = "Waiting...";
+
+  const computerBoxDescription = document.createElement("div");
+  computerBoxDescription.classList.add("box-description");
+
+  const computerParagraph = document.createElement("p");
+  computerParagraph.textContent = "Waiting for you to place your ships";
+
+  computerBoxDescription.appendChild(computerParagraph);
+
+  computerLabel.appendChild(computerHeading);
+  computerLabel.appendChild(computerBoxDescription);
 
   const battle = new Game();
 
@@ -29,7 +69,7 @@ function playTurn() {
 }
 
 const shipDirectionButton = document.getElementById("ship-direction");
-// dialogElem.showModal();
+
 shipDirectionButton.addEventListener("click", () => {
   if (shipDirectionButton.textContent == "horizontal") {
     shipDirectionButton.textContent = "vertical";

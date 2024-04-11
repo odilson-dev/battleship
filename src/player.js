@@ -33,16 +33,3 @@ class ComputerPlayer extends Player {
     this.gameboard.receiveAttack(x, y);
   }
 }
-
-// // Example usage:
-// const playerBoard = new GameBoard(10);
-// const computerBoard = new GameBoard(10);
-
-// const player = new Player("Player 1", computerBoard);
-// const computer = new ComputerPlayer(playerBoard);
-
-// // Player takes turn
-// player.attackOpponent(2, 3);
-
-// // Computer takes turn
-// computer.attackOpponent();

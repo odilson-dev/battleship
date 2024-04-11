@@ -148,6 +148,9 @@ export class Game {
 
           if (this.playerBoard.canThisShipBePlacedHere(shipA, dataY, dataX)) {
             this.playerBoard.placeShip(shipA, dataX, dataY);
+            document.getElementById(
+              "ship-left-to-place"
+            ).textContent = `${this.playerShipNamesAndLength.length} ships left to place`;
 
             let posX = parseInt(dataX);
             let posY = parseInt(dataY);
@@ -165,12 +168,36 @@ export class Game {
               }
 
               if (this.playerShipNamesAndLength.length == 0) {
+                const playerLabel = document.querySelector(".player-label");
+                const computerLabel = document.querySelector(".computer-label");
+
+                playerLabel.textContent = "";
+                computerLabel.textContent = "";
+
+                const playerH3 = document.createElement("h3");
+                const computerH3 = document.createElement("h3");
+
+                playerH3.textContent = "The computer sinks 1 ship per turn";
+                computerH3.textContent =
+                  "Click on this board to sink their ships!";
+                playerLabel.appendChild(playerH3);
+                computerLabel.appendChild(computerH3);
+
+                const shipsRemainingPlayer = document.createElement("div");
+                const shipsRemainingComputer = document.createElement("div");
+
+                shipsRemainingPlayer.classList.add("ship-remaining-player");
+                shipsRemainingComputer.classList.add("ship-remaining-computer");
+
+                shipsRemainingPlayer.textContent = "Ships remaining 6";
+                shipsRemainingComputer.textContent = "Ships remaining 6";
+
+                playerLabel.appendChild(shipsRemainingPlayer);
+                computerLabel.appendChild(shipsRemainingComputer);
+
                 this.startGame();
               }
             }
-            document.getElementById(
-              "ship-left-to-place"
-            ).textContent = `${this.playerShipNamesAndLength.length} ships left to place`;
           }
         }
       }
@@ -178,7 +205,9 @@ export class Game {
   }
   startGame() {
     const shipB = new Ship("Buto", 3, "vertical");
+    const shipC = new Ship("But", 2, "horizontal");
     this.computerBoard.placeShip(shipB, 0, 0);
+    // this.computerBoard.placeShip(shipC, 1, 1);
 
     this.computerBoard.allowPlayerToAttackComputer(
       this.computerBoardDOM,

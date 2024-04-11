@@ -8,6 +8,7 @@ export class GameBoard {
     this.grid = Array.from({ length: size }, () => Array(size).fill(null));
     this.ships = [];
     this.missedAttacks = [];
+    this.shipsRemaining = 6;
   }
 
   placeShip(ship, x, y) {
@@ -142,6 +143,19 @@ export class ComputerGameBoard extends GameBoard {
         event.target.classList.add("missed");
       } else {
         event.target.classList.add("hit");
+
+        if (this.grid[posY][posX].isSunk) {
+          this.shipsRemaining--;
+          const shipsRemainingComputer = document.querySelector(
+            ".ship-remaining-computer"
+          );
+          shipsRemainingComputer.textContent = `Ships remaining: ${this.shipsRemaining}`;
+          shipsRemainingComputer.classList.add("red-background");
+          setTimeout(() => {
+            shipsRemainingComputer.classList.remove("red-background");
+          }, 3000);
+        }
+
         if (this.haveAllShipsBeenSunk()) {
           playGameOver();
           gameOverDialog.querySelector("h2").textContent =
@@ -152,10 +166,6 @@ export class ComputerGameBoard extends GameBoard {
         }
       }
 
-      // Remove the click event listener after clicking
-      // allOpponentCells.forEach((opponentCell) => {
-      //   opponentCell.removeEventListener("click", clickHandler);
-      // });
       if (this.countAttackReceived % 5 == 0) {
         let audio = new Audio(`sounds/incoming_missile.mp3`);
         audio.play();
@@ -176,6 +186,17 @@ export class ComputerGameBoard extends GameBoard {
           .querySelector(`td[data-x="${x}"][data-y="${y}"]`)
           .classList.add("missed");
       } else {
+        if (playerBoard.grid[y][x].isSunk) {
+          playerBoard.shipsRemaining--;
+          const shipsRemainingPlayer = document.querySelector(
+            ".ship-remaining-player"
+          );
+          shipsRemainingPlayer.textContent = `Ships remaining: ${playerBoard.shipsRemaining}`;
+          shipsRemainingPlayer.classList.add("red-background");
+          setTimeout(() => {
+            shipsRemainingPlayer.classList.remove("red-background");
+          }, 3000);
+        }
         playerBoardDOM
           .querySelector(`td[data-x="${x}"][data-y="${y}"]`)
           .classList.add("hit");
@@ -224,7 +245,6 @@ function chooseRandomNumbers() {
 
 function playAudio() {
   let n = Math.floor(Math.random() * 10) + 1;
-  console.log(n);
   let audio = new Audio(`sounds/son${n}.mp3`);
 
   audio.play();
