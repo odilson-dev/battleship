@@ -118,6 +118,7 @@ export class ComputerGameBoard extends GameBoard {
   constructor() {
     super();
     this.countAttackReceived = 0;
+    this.chosenPairs = new Set();
   }
 
   allowPlayerToAttackComputer(computerBoardDOM, playerBoard, playerBoardDOM) {
@@ -126,14 +127,18 @@ export class ComputerGameBoard extends GameBoard {
     );
     // Define the click event handler function
     const clickHandler = (event) => {
-      playAudio();
       this.countAttackReceived++;
-      if (
-        this.receiveAttack(
-          event.target.getAttribute("data-x"),
-          event.target.getAttribute("data-y")
-        ) == "Miss!"
-      ) {
+      const posX = event.target.getAttribute("data-x");
+      const posY = event.target.getAttribute("data-y");
+
+      if (this.chosenPairs.has(`${posX}-${posY}`)) {
+        return;
+      }
+      playAudio();
+
+      this.chosenPairs.add(`${posX}-${posY}`);
+
+      if (this.receiveAttack(posX, posY) == "Miss!") {
         event.target.classList.add("missed");
       } else {
         event.target.classList.add("hit");

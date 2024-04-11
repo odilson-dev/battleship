@@ -233,3 +233,6 @@ footer {
   color: red; /* Change the color */
   font-size: 30px; /* Change the size */
 }
+body {
+  margin: 0;
+}
