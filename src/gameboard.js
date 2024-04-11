@@ -48,13 +48,10 @@ export class GameBoard {
 
     for (let i = 0; i < ship.length; i++) {
       if (isPositionWithinBounds(posX, posY)) {
-        console.log("Ship placement out of bounds.");
         return false;
       }
       // Check if another ship is placed at the possX and posY
       else if (this.grid[posY][posX] !== null) {
-        console.log(`PosX: ${posX}, ${posY}`);
-        console.log("Another ship is already placed here.");
         return false;
       }
       if (ship.direction === "horizontal") {
@@ -62,11 +59,10 @@ export class GameBoard {
       } else if (ship.direction === "vertical") {
         posY++;
       } else {
-        console.log("Invalid direction. Use 'horizontal' or 'vertical'");
         return false;
       }
     }
-    console.log("Ok");
+
     return true;
   }
 

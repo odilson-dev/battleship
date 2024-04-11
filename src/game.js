@@ -41,7 +41,6 @@ export class Game {
         const dataX = cell.getAttribute("data-x");
         const dataY = cell.getAttribute("data-y");
         const shipDetails = this.playerShipNamesAndLength[0];
-        console.log(shipDetails);
         const shipA = new Ship(...shipDetails);
         shipA.direction = this.shipDirectionButton.textContent;
         if (this.playerBoard.canThisShipBePlacedHere(shipA, dataY, dataX)) {
@@ -85,7 +84,7 @@ export class Game {
         const dataY = cell.getAttribute("data-y");
 
         const shipDetails = this.playerShipNamesAndLength[0];
-        console.log(shipDetails);
+
         const shipA = new Ship(...shipDetails);
         shipA.direction = this.shipDirectionButton.textContent;
 
