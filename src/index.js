@@ -37,6 +37,14 @@ function start() {
   shipDirectionButton.setAttribute("id", "ship-direction");
   shipDirectionButton.textContent = "horizontal";
 
+  shipDirectionButton.addEventListener("click", () => {
+    if (shipDirectionButton.textContent == "horizontal") {
+      shipDirectionButton.textContent = "vertical";
+    } else {
+      shipDirectionButton.textContent = "horizontal";
+    }
+  });
+
   const shipLeftToPlace = document.createElement("p");
   shipLeftToPlace.setAttribute("id", "ship-left-to-place");
   shipLeftToPlace.textContent = "6 ships left to place";
@@ -67,13 +75,3 @@ function start() {
 
   battle.setUpBoards();
 }
-
-const shipDirectionButton = document.getElementById("ship-direction");
-
-shipDirectionButton.addEventListener("click", () => {
-  if (shipDirectionButton.textContent == "horizontal") {
-    shipDirectionButton.textContent = "vertical";
-  } else {
-    shipDirectionButton.textContent = "horizontal";
-  }
-});
