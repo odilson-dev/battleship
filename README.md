@@ -1,6 +1,6 @@
 # Battleship Game
 
-This is a project completed as part of the curriculum for [The Odin Project](https://www.theodinproject.com/). The goal of this project is to implement the classic game Battleship using Test Driven Development (TDD) principles.
+The goal of this project is to implement the classic game Battleship using Test Driven Development (TDD) principles.
 
 ![Battleship Game](/images/battleship.png)
 
